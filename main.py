@@ -8,7 +8,8 @@ from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 
 from utils.reporter import send_email
-from parsers.data_parser import parse_data
+# from parsers.data_parser import parse_data
+from parsers.data_parser_V1 import parse_data
 from initjob.es_template import make_template
 
 
