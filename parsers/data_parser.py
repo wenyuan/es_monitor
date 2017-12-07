@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 """
 各节点的数据结构采用nested形式
+优点:节省docs数,性能上有一定好处
+缺点:不支持kibana的可视化
 """
 import time
 
@@ -9,15 +11,14 @@ def parse_data(nodes_data, latest_nodes_data, es_config_info):
     esindex_prefix = es_config_info['esindex_prefix']
     data_type = es_config_info['data_type']
     values = []
-    storage_nodes = []
+    storage_nodes = []    # nested field: to store status_info of each es_node
+    timestamp = time.strftime('%Y-%m-%dT%H:%M:%S+08:00')
+    final_data = {'@timestamp': timestamp, 'appname': 'monitor', 'type': 'nodes_status',  # normal data
+                  'nodes_status': {'data_nodes': storage_nodes}
+                  }
     for node in nodes_data.keys():
         data = nodes_data[node]
         latest_data = latest_nodes_data[node]
-
-        timestamp = time.strftime('%Y-%m-%dT%H:%M:%S+08:00')
-        final_data = {'@timestamp': timestamp, 'appname': 'monitor', 'type': 'nodes_status',    # normal data
-                      'nodes_status': {'data_nodes': storage_nodes}
-                      }
 
         node_ip = latest_data['ip'].split(':')[0]                                                   # optional data
         host = latest_data['host']
@@ -43,11 +44,11 @@ def parse_data(nodes_data, latest_nodes_data, es_config_info):
 
         storage_nodes.append(single_data_node_status)
 
-        esindex = "%s-%s" % (esindex_prefix, time.strftime('%Y.%m.%d'))
-        print(esindex)
-        values.append({
-            "_index": esindex,
-            "_type": data_type,
-            "_source": final_data
-        })
+    esindex = "%s-%s" % (esindex_prefix, time.strftime('%Y.%m.%d'))
+    print(esindex)
+    values.append({
+        "_index": esindex,
+        "_type": data_type,
+        "_source": final_data
+    })
     return values
