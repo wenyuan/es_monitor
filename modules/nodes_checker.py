@@ -55,7 +55,7 @@ class NodesChecker(object):
     def get_nodes_status(self, es_url):
         b = StringIO.StringIO()
         c = pycurl.Curl()
-        c.setopt(pycurl.URL, 'http://'+es_url+':9200/_nodes/stats/indices,os,jvm/search')
+        c.setopt(pycurl.URL, 'http://'+es_url+':9200/_nodes/stats/indices,os,process,jvm/search')
         c.setopt(pycurl.WRITEFUNCTION, b.write)
         c.perform()
         body = b.getvalue()

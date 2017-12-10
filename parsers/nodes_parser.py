@@ -52,9 +52,12 @@ class NodesParser(object):
 
             if 'timestamp' in latest_data['os'].keys():    # remove reduplicated data
                 latest_data['os'].pop('timestamp')
+            if 'timestamp' in latest_data['process'].keys():    # remove reduplicated data
+                latest_data['process'].pop('timestamp')
             if 'timestamp' in latest_data['jvm'].keys():
                 latest_data['jvm'].pop('timestamp')
             single_data_node_status['os'] = latest_data['os']
+            single_data_node_status['process'] = latest_data['process']
             single_data_node_status['jvm'] = latest_data['jvm']
             single_data_node_status['jvm']['gc']['collectors']['young']['current_collection_count'] = \
                 latest_young_gc_count - young_gc_count
@@ -111,9 +114,12 @@ class NodesParser(object):
 
             if 'timestamp' in latest_data['os'].keys():    # remove reduplicated data
                 latest_data['os'].pop('timestamp')
+            if 'timestamp' in latest_data['process'].keys():
+                latest_data['process'].pop('timestamp')
             if 'timestamp' in latest_data['jvm'].keys():
                 latest_data['jvm'].pop('timestamp')
             final_data['nodes_status']['os'] = latest_data['os']
+            final_data['nodes_status']['process'] = latest_data['process']
             final_data['nodes_status']['jvm'] = latest_data['jvm']
             final_data['nodes_status']['jvm']['gc']['collectors']['young']['current_collection_count'] = \
                 latest_young_gc_count - young_gc_count
@@ -125,7 +131,6 @@ class NodesParser(object):
                 latest_old_gc_time_in_millis - old_gc_time_in_millis
 
             esindex = "%s-%s" % (esindex_prefix, time.strftime('%Y.%m.%d'))
-            print(esindex)
             values.append({
                 "_index": esindex,
                 "_type": data_type,

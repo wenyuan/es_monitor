@@ -22,9 +22,9 @@ class Monitor(object):
 
     def main_task(self):
         threads = []
-        t1 = threading.Thread(target=self.nodes_task, args=(u'开始采集节点信息',))
+        t1 = threading.Thread(target=self.nodes_task, args=('开始采集节点信息',))
         threads.append(t1)
-        t2 = threading.Thread(target=self.indices_task, args=(u'开始采集索引信息',))
+        t2 = threading.Thread(target=self.indices_task, args=('开始采集索引信息',))
         threads.append(t2)
 
         for thread in threads:
