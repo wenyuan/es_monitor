@@ -21,14 +21,14 @@ class IndicesParser(object):
         temp_container = {}                                                             # uuid:docs_count
         for index_data in indices_data:
             index_attr = index_data.strip().split()
-            if not index_attr:
-                break
+            if not index_attr or len(index_attr) != 10:
+                continue
             temp_container[index_attr[3]] = index_attr[6]
 
         for i, latest_index_data in enumerate(latest_indices_data):
             latest_index_attr = latest_index_data.strip().split()
-            if not latest_index_attr:
-                break
+            if not latest_index_attr or len(latest_index_attr) != 10:
+                continue
             final_data = copy.deepcopy(final_data_template)
             final_data['indices_status']['health'] = latest_index_attr[0]
             final_data['indices_status']['status'] = latest_index_attr[1]

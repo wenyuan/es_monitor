@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>es_monitor字段说明 — Help 1.0 文档</title>
+    <link rel="stylesheet" href="./theme.css" type="text/css">
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <!-- content -->
+          <div role="main" class="document">
+            <div class="section" id="es_monitor">
+              <h1>es_monitor字段说明</h1>
+              <!-- section1 -->
+              <div class="section" id="nodes_status">
+                <h2>1. nodes_status</h2>
+                <div class="wy-table-responsive">
+                  <table border="1" class="docutils">
+                    <colgroup>
+                      <col width="38%">
+                      <col width="62%">
+                    </colgroup>
+                    <thead valign="bottom">
+                      <tr class="row-odd"><th class="head">指标</th>
+                      <th class="head">含义</th>
+                      </tr>
+                    </thead>
+                    <tbody valign="top">
+                      <tr class="row-even">
+                        <td>node_ip</td>
+                        <td>该节点的ip</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>indices.search.query_time_in_millis</td>
+                        <td>一个时间区间内进行ES查询总耗时(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>indices.search.query_total</td>
+                        <td>一个时间区间内对ES查询总次数(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.uptime_in_millis</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.buffer_pools.direct.count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.buffer_pools.direct.total_capacity_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.buffer_pools.direct.used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.buffer_pools.mapped.count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.buffer_pools.mapped.total_capacity_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.buffer_pools.mapped.used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.classes.current_loaded_count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.classes.total_loaded_count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.classes.total_unloaded_count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.gc.collectors.old.collection_count</td>
+                        <td>老生代的垃圾回收次数(从启动节点开始计算,累积值)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.gc.collectors.old.collection_time_in_millis</td>
+                        <td>老生代的垃圾回收累积时间(从启动节点开始计算，累积值)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.gc.collectors.old.current_collection_count</td>
+                        <td>一个时间区间内老生代的垃圾回收次数(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.gc.collectors.old.current_collection_time_in_millis</td>
+                        <td>一个时间区间内老生代的垃圾回收耗时(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.gc.collectors.young.collection_count</td>
+                        <td>新生代的垃圾回收次数(从启动节点开始计算，累积值)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.gc.collectors.young.collection_time_in_millis</td>
+                        <td>新生代的垃圾回收累积时间(从启动节点开始计算，累积值)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.gc.collectors.young.current_collection_count</td>
+                        <td>一个时间区间内新生代的垃圾回收次数(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.gc.collectors.young.current_collection_time_in_millis</td>
+                        <td>一个时间区间内新生代的垃圾回收耗时(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.heap_committed_in_bytes</td>
+                        <td>被指派的堆内存大小(当前被分配给进程的),<a style="color: black" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/heap-sizing.html">理想情况下应等于heap_max_in_bytes</a></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.heap_max_in_bytes</td>
+                        <td>堆(heap)被允许分配的最大值(就是从系统总内存中分给ES的)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.heap_used_in_bytes</td>
+                        <td>正在使用的堆内存(heap)大小(bytes)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.heap_used_percent</td>
+                        <td>达到75%:开始GC 长期大于85%:比较危险 大于90%基本有问题了(<a style="color: black" href="http://aoyouzi.iteye.com/blog/2119716">OOM</a>)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.non_heap_committed_in_bytes</td>
+                        <td>栈(stack)和方法区(method)被允许分配的最大值</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.non_heap_used_in_bytes</td>
+                        <td>正在使用的栈(stack)和方法区(method)内存大小(bytes)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.pools.old.max_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.pools.old.peak_max_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.pools.old.peak_used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.pools.old.used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.pools.young.max_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.pools.young.peak_max_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.pools.young.peak_used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.pools.young.used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.pools.survivor.max_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.pools.survivor.peak_max_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.mem.pools.survivor.peak_used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.mem.pools.survivor.used_in_bytes</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>jvm.threads.count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>jvm.threads.peak_count</td>
+                        <td></td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>os.cpu.percent</td>
+                        <td>cpu使用率(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>os.cpu.load_average.15m</td>
+                        <td>15分钟里cpu平均负载(任务数)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>os.cpu.load_average.5m</td>
+                        <td>5分钟里cpu平均负载(任务数)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>os.cpu.load_average.1m</td>
+                        <td>1分钟里cpu平均负载(任务数)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>os.mem.free_in_bytes</td>
+                        <td>空闲内存大小(bytes)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>os.mem.free_percent</td>
+                        <td>空闲内存百分比(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>os.mem.used_in_bytes</td>
+                        <td>已使用内存大小(bytes)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>os.mem.used_percent</td>
+                        <td>已使用内存百分比(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>os.mem.total_in_bytes</td>
+                        <td>总内存大小(bytes)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>os.swap.free_in_bytes</td>
+                        <td>空闲交换分区大小(bytes)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>os.swap.used_in_bytes</td>
+                        <td>已使用交换分区大小(bytes)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>os.swap.total_in_bytes</td>
+                        <td>总交换分区大小(bytes)(整个操作系统)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>process.max_file_descriptors</td>
+                        <td>可以打开的文件描述符上限(Elasticsearch的JVM进程)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>process.open_file_descriptors</td>
+                        <td>当前打开的文件描述符数(Elasticsearch的JVM进程)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>process.cpu.percent</td>
+                        <td>cpu使用率(Elasticsearch的JVM进程所使用的)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>process.cpu.total_in_millis</td>
+                        <td>Java虚拟机正在运行的进程使用的CPU时间(毫秒),如果不支持，则为-1</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>process.mem.total_virtual_in_bytes</td>
+                        <td>用于保证运行中进程的虚拟内存大小(bytes)(Elasticsearch的JVM进程所使用的)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- section2 -->
+              <div class="section" id="indices_status">
+                <h2>2. indices_status</h2>
+                <div class="wy-table-responsive">
+                  <table border="1" class="docutils">
+                    <colgroup>
+                      <col width="38%">
+                      <col width="62%">
+                    </colgroup>
+                    <thead valign="bottom">
+                    <tr class="row-odd"><th class="head">指标</th>
+                      <th class="head">含义</th>
+                    </tr>
+                    </thead>
+                    <tbody valign="top">
+                      <tr class="row-even">
+                        <td>health</td>
+                        <td>索引健康状态(green:一切正常 yellow:所有的数据可用,但是某些副本没有被分配 red:因为某些原因,某些数据不可用)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>status</td>
+                        <td>索引状态(open/close),目前我们只统计open状态的索引</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>index_name</td>
+                        <td>索引名称</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>uuid</td>
+                        <td>索引的uuid(唯一)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>pri</td>
+                        <td>索引的主分片数</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>rep</td>
+                        <td>索引的副本数</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>docs_count</td>
+                        <td>索引的总文档数</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>docs_deleted</td>
+                        <td>索引中已删除的文档数(delete后仅标记为已删除,segment合并后才会彻底删除,在此之前它仍然会占用着JVM heap和操作系统的文件cache等资源)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>store_size</td>
+                        <td>总存储大小(所有分片包括副本所占磁盘空间)</td>
+                      </tr>
+                      <tr class="row-odd">
+                        <td>pri_store_size</td>
+                        <td>主要存储大小(索引所占磁盘空间)</td>
+                      </tr>
+                      <tr class="row-even">
+                        <td>added_docs_count</td>
+                        <td>一个时间区间内新增文档数(该时间区间为sampling_speed,单位秒)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- foot -->
+          <footer>
+            <hr>
+            <div role="contentinfo">
+              <p>
+                © Copyright 2017, xwenyuan.
+                最后更新于 2017-12-01 16:32:00.
+              </p>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </section>
+    </div>
+  </body>
+</html>
