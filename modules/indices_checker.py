@@ -1,7 +1,5 @@
 # -*- coding:utf-8 -*-
-import os
 import time
-import json
 import pycurl
 import StringIO
 import ConfigParser
