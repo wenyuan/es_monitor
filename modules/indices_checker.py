@@ -19,6 +19,7 @@ class IndicesChecker(object):
         self.esindex_prefix = conf.get("ES", "esindex_prefix")
         self.data_type = conf.get("indices_module", "data_type")
         self.sampling_speed = int(conf.get("indices_module", "sampling_speed"))
+        self.store_size_unit = conf.get("indices_module", "store_size_unit")
 
         self.indices_parser = IndicesParser()
         self.reporter = Reporter()
@@ -52,7 +53,7 @@ class IndicesChecker(object):
 
     def make_indices_data(self, indices_data):
         latest_indices_data = self.get_indices_status(self.es_url)
-        es_config_info = {'esindex_prefix': self.esindex_prefix, 'data_type': self.data_type}
+        es_config_info = {'esindex_prefix': self.esindex_prefix, 'data_type': self.data_type, 'store_size_unit': self.store_size_unit}
         return self.indices_parser.parse_data(indices_data, latest_indices_data, es_config_info)
 
     def send_data(self, es, values):

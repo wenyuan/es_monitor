@@ -314,12 +314,12 @@
                         <td>索引中已删除的文档数(delete后仅标记为已删除,segment合并后才会彻底删除,在此之前它仍然会占用着JVM heap和操作系统的文件cache等资源)</td>
                       </tr>
                       <tr class="row-even">
-                        <td>store_size</td>
-                        <td>总存储大小(所有分片包括副本所占磁盘空间)</td>
+                        <td>store_size_in_xxx</td>
+                        <td>总存储大小(该字段单位由配置文件中设置)(所有分片包括副本所占磁盘空间)</td>
                       </tr>
                       <tr class="row-odd">
-                        <td>pri_store_size</td>
-                        <td>主要存储大小(索引所占磁盘空间)</td>
+                        <td>pri_store_size_in_xxx</td>
+                        <td>主要存储大小(该字段单位由配置文件中设置)(索引所占磁盘空间)</td>
                       </tr>
                       <tr class="row-even">
                         <td>added_docs_count</td>
