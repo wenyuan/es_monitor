@@ -31,15 +31,14 @@ class NodesParser(object):
             single_data_node_status = {'node_id': node, 'node_ip': node_ip, 'host': host,
                                        'indices': {'search': {},'docs':{},'segments':{},'refresh':{},'merges':{}},
                                        'os': {},
-                                       #'indices':{}
                                        'jvm': {},
                                        'diff': {}
                                        }
-            query_total = data['indices']['search']['query_total']                                   # search_info,is history data in default
+            query_total = data['indices']['search']['query_total']                                   # search_info,默认是node启动后的历史数据
             query_time_in_millis = data['indices']['search']['query_time_in_millis']
             latest_query_total = latest_data['indices']['search']['query_total']
             latest_query_time_in_millis = latest_data['indices']['search']['query_time_in_millis']
-            young_gc_count = data['jvm']['gc']['collectors']['young']['collection_count']          # gc_info,is history data in default
+            young_gc_count = data['jvm']['gc']['collectors']['young']['collection_count']          # gc_info,默认是node启动后的历史数据
             young_gc_time_in_millis = data['jvm']['gc']['collectors']['young']['collection_time_in_millis']
             latest_young_gc_count = latest_data['jvm']['gc']['collectors']['young']['collection_count']
             latest_young_gc_time_in_millis = latest_data['jvm']['gc']['collectors']['young']['collection_time_in_millis']
@@ -70,13 +69,10 @@ class NodesParser(object):
             single_data_node_status['jvm']['gc']['collectors']['old']['current_collection_time_in_millis'] = \
                 latest_old_gc_time_in_millis - old_gc_time_in_millis
 
-
-
             single_data_node_status['diff_gc_old_count'] = self.get_diff_value(data, latest_data, 'jvm.gc.collectors.old.collection_count')
             storage_nodes.append(single_data_node_status)
 
         esindex = "%s-%s" % (esindex_prefix, time.strftime('%Y.%m.%d'))
-        print(esindex)
         values.append({
             "_index": esindex,
             "_type": data_type,
@@ -113,11 +109,11 @@ class NodesParser(object):
             final_data = copy.deepcopy(final_data_template)
             final_data['nodes_status']['node_ip'] = node_ip
 
-            query_total = data['indices']['search']['query_total']    # search_info,is history data in default
+            query_total = data['indices']['search']['query_total']    # search_info,默认是node启动后的历史数据
             query_time_in_millis = data['indices']['search']['query_time_in_millis']
             latest_query_total = latest_data['indices']['search']['query_total']
             latest_query_time_in_millis = latest_data['indices']['search']['query_time_in_millis']
-            young_gc_count = data['jvm']['gc']['collectors']['young']['collection_count']    # gc_info,is history data in default
+            young_gc_count = data['jvm']['gc']['collectors']['young']['collection_count']    # gc_info,默认是node启动后的历史数据
             young_gc_time_in_millis = data['jvm']['gc']['collectors']['young']['collection_time_in_millis']
             latest_young_gc_count = latest_data['jvm']['gc']['collectors']['young']['collection_count']
             latest_young_gc_time_in_millis = latest_data['jvm']['gc']['collectors']['young']['collection_time_in_millis']
@@ -147,9 +143,6 @@ class NodesParser(object):
                 latest_old_gc_count - old_gc_count
             final_data['nodes_status']['jvm']['gc']['collectors']['old']['current_collection_time_in_millis'] = \
                 latest_old_gc_time_in_millis - old_gc_time_in_millis
-
-
-
 
             final_data['nodes_status']['diff']['diff_gc_old_count'] = self.get_diff_value(data, latest_data, 'jvm.gc.collectors.old.collection_count')
             final_data['nodes_status']['diff']['diff_gc_young_count'] = self.get_diff_value(data, latest_data, 'jvm.gc.collectors.young.collection_count')

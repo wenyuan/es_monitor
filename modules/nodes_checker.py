@@ -4,19 +4,24 @@ import json
 import pycurl
 import StringIO
 import ConfigParser
+import logging.config
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 
 from utils.reporter import Reporter
 from parsers.nodes_parser import NodesParser
 from initjob.es_template import EsTemplate
+from config.logging_config import CONFIG_PATH, LOGGING
+
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger('nodes_checker')
 
 
 class NodesChecker(object):
 
     def __init__(self):
         conf = ConfigParser.ConfigParser()
-        conf.read('config.ini')
+        conf.read(CONFIG_PATH)
         self.es_url = conf.get("ES", "es_url")
         self.esindex_prefix = conf.get("ES", "esindex_prefix")
         self.data_type = conf.get("nodes_module", "data_type")
@@ -29,12 +34,13 @@ class NodesChecker(object):
         self.reporter = Reporter()
 
     def start_nodes_task(self):
-        es = Elasticsearch(self.es_url)
         self.es_template.make_nodes_template(self.es_url, self.data_structure)
         if_send_email = True
         latest_check_time = time.strftime('%Y-%m-%dT%H时')
         while True:
+            logger.info('Start nodes_checker')
             try:
+                es = Elasticsearch(self.es_url)
                 nodes_count, nodes_data = self.get_nodes_status(self.es_url)
                 if nodes_count < int(self.nodes_total_count) and time.strftime('%Y-%m-%dT%H时') != latest_check_time:
                     email_title = u'上海ES集群告警'
@@ -45,12 +51,23 @@ class NodesChecker(object):
                 values = self.make_nodes_data(nodes_count, nodes_data)
                 self.send_data(es, values)
                 if_send_email = True
+                for conn in es.transport.connection_pool.connections:
+                    conn.pool.close()
+                logger.info('Nodes_checker is running normally')
             except pycurl.error:
                 if if_send_email:
                     email_title = u'上海ES集群告警'
                     email_detail = u'以下节点或整个集群出现异常,请进行检查:' + self.es_url
                     self.reporter.send_email(email_title, email_detail)
                     if_send_email = False
+                    logger.warn('Nodes_checker fails to connect to es, we will send an alert e-mail')
+                else:
+                    logger.warn('Nodes_checker fails to connect to es, we have already sent an alert e-mail')
+            except Exception as e:
+                logger.error('Some exception happened to nodes_checker, details are as follows:')
+                logger.error(e)
+            finally:
+                logger.info('Finish nodes_checker\n')
 
     def get_nodes_status(self, es_url):
         b = StringIO.StringIO()
@@ -92,6 +109,7 @@ class NodesChecker(object):
 
     def send_data(self, es, values):
         helpers.bulk(es, values)
+
 
 if __name__ == "__main__":
     nodes_parser = NodesChecker()

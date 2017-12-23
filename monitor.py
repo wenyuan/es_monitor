@@ -2,8 +2,14 @@
 import time
 import threading
 from time import ctime
+import logging.config
+
 from modules.nodes_checker import NodesChecker
 from modules.indices_checker import IndicesChecker
+from config.logging_config import LOGGING
+
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger('monitor')
 
 
 class Monitor(object):
@@ -13,18 +19,18 @@ class Monitor(object):
         self.indices_checker = IndicesChecker()
 
     def nodes_task(self, func):
-        print("%s %s" % (func, time.strftime('%Y-%m-%d %H:%M:%S')))
+        logger.info("%s %s" % (func, time.strftime('%Y-%m-%d %H:%M:%S')))
         self.nodes_checker.start_nodes_task()
 
     def indices_task(self, func):
-        print("%s %s" % (func, time.strftime('%Y-%m-%d %H:%M:%S')))
+        logger.info("%s %s" % (func, time.strftime('%Y-%m-%d %H:%M:%S')))
         self.indices_checker.start_indices_task()
 
     def main_task(self):
         threads = []
-        t1 = threading.Thread(target=self.nodes_task, args=('开始采集节点信息',))
+        t1 = threading.Thread(target=self.nodes_task, args=('开始运行采集节点信息的脚本',))
         threads.append(t1)
-        t2 = threading.Thread(target=self.indices_task, args=('开始采集索引信息',))
+        t2 = threading.Thread(target=self.indices_task, args=('开始运行采集索引信息的脚本',))
         threads.append(t2)
 
         for thread in threads:
@@ -37,7 +43,7 @@ class Monitor(object):
             if not alive:
                 break
             time.sleep(3)
-        print("all tasks over %s" % ctime())
+        logger.info("all tasks over %s" % ctime())
 
 
 if __name__ == "__main__":

@@ -6,6 +6,12 @@ flat_template是使用扁平化数据结构的template
 
 import requests
 import json
+import logging.config
+
+from config.logging_config import LOGGING
+
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger('monitor')
 
 template_name = 'cc-monitor-template'
 
@@ -78,18 +84,21 @@ class EsTemplate(object):
         else:
             template = nodes_nested_template
         url = "http://{0}:9200/_template/{1}".format(es_url, template_name)
-        r = requests.get(url)
-        if r.status_code == 404:
-            r = requests.put(url, data=json.dumps(template), headers={'content-type': 'application/json'})
-            print(r.text)
-            if r.status_code == 200:
-                print('put template %s success!' % template_name)
+        try:
+            r = requests.get(url)
+            if r.status_code == 404:
+                r = requests.put(url, data=json.dumps(template), headers={'content-type': 'application/json'})
+                logger.info(r.text)
+                if r.status_code == 200:
+                    logger.info('Put template %s success!' % template_name)
+                else:
+                    logger.info('Put template %s failed!' % template_name)
+            elif r.status_code == 200:
+                logger.info('Template %s exists!' % template_name)
             else:
-                print('put template %s failed!' % template_name)
-        elif r.status_code == 200:
-            print('template %s exists!' % template_name)
-        else:
-            print('get template %s error!' % template_name)
+                logger.info('Get template %s error!' % template_name)
+        except Exception as e:
+            logger.error(e)
 
     def make_indices_template(self, es_url):
         pass
