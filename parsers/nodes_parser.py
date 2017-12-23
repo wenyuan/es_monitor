@@ -87,8 +87,9 @@ class NodesParser(object):
         tmp = valuedic
         #print tmp
         for k in key:
-            tmp = tmp.get(k)
-        return tmp
+            if tmp:
+                tmp = tmp.get(k)
+        return tmp if tmp else 1         # 这里有个Nonetype的问题，我做了临时措施... by xwy
 
     def get_diff_value(self, oldnode, newnode, value_key):
         return self.get_value_from_dic(newnode, value_key) - self.get_value_from_dic(oldnode, value_key)
