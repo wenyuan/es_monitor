@@ -112,5 +112,6 @@ class NodesChecker(object):
 
 
 if __name__ == "__main__":
-    nodes_parser = NodesChecker()
-    nodes_parser.start_nodes_task()
+    #nodes_parser = NodesChecker()
+    #nodes_parser.start_nodes_task()
+    logger.error('hello')
