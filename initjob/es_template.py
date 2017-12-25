@@ -21,7 +21,7 @@ nodes_nested_template = {
     "settings": {
         "index": {
             "refresh_interval": "10s",
-            "number_of_shards": 5,
+            "number_of_shards": 1,
             "number_of_replicas": 0,
             "routing.allocation.total_shards_per_node": 1
         }
@@ -54,7 +54,7 @@ nodes_flat_template = {
     "settings": {
         "index": {
             "refresh_interval": "10s",
-            "number_of_shards": 5,
+            "number_of_shards": 1,
             "number_of_replicas": 0,
             "routing.allocation.total_shards_per_node": 1
         }
