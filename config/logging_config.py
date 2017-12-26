@@ -10,7 +10,7 @@ BASE_DIR = reduce(lambda x, y: os.path.dirname(x), range(2), os.path.abspath(__f
 CONFIG_PATH = os.path.join(BASE_DIR, 'config', 'config.ini')
 
 # Logging settings Begin
-LOGGING_FILE_PATH = os.path.join(BASE_DIR, 'log') if BASE_DIR else os.path.join(BASE_DIR, 'log')
+LOGGING_FILE_PATH = os.path.join(BASE_DIR, 'logs') if BASE_DIR else os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOGGING_FILE_PATH):
     os.makedirs(LOGGING_FILE_PATH)
 LOGGING = {
