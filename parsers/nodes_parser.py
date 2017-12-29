@@ -1,4 +1,6 @@
-# -*- coding:utf-8 -*-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """
 nested形式
     优点:节省docs数,性能上有一定好处

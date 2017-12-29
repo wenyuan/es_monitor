@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 """
 nested_template是使用nested数据结构的template
 flat_template是使用扁平化数据结构的template
